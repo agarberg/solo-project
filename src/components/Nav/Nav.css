@@ -3,8 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height:40px;
+  height:60px;
   width:375px;
+  border: solid black 2px;
   /* margin: 0 0 30px; */
   background-color: #00acb0;
   overflow: hidden;
