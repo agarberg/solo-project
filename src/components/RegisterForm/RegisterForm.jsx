@@ -17,6 +17,8 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
+        full_name: name,
+        email: userEmail,
       },
     });
   }; // end registerUser
@@ -72,7 +74,6 @@ function RegisterForm() {
             type="text"
             name="userEmail"
             value={userEmail}
-            required
             onChange={(event) => setUserEmail(event.target.value)}
           />
         </label>
