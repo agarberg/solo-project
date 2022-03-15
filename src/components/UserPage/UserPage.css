@@ -3,9 +3,11 @@
     height: 60px;
     width: 350px;
     border: solid black 3px;
-    margin: 5px
+    margin: 5px;
+
 }
 h4 {
+    display: flex;
  justify-content: flex-end;
 
 }

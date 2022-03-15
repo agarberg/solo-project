@@ -9,9 +9,9 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <p className="nav-title">tech time tracker</p>
-      </Link>
+      {/* <Link to="/home">
+      </Link> */}
+      <p className="nav-title">tech time tracker</p>
       <div>
         {/* If no user is logged in, show these links */}
         {!user.id && (
