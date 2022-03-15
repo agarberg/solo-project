@@ -16,11 +16,9 @@ function UserPage() {
   return (
     <div className="container">
       <div className="hrsBilledDate">
-        <p>
-        {dayOfWeekName}
-        </p>
-      <p>{month}/{day}
-      </p>
+        <p>{dayOfWeekName}</p>
+      <p>{month}/{day}</p>
+      <h4>Hours this week</h4>
       </div>
       <div className="inputFields">
       <TextField fullWidth 

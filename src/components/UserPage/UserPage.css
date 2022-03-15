@@ -1,6 +1,11 @@
 .hrsBilledDate {
+    display: flex;
     height: 80px;
     width: 300px;
     border: solid black 3px;
     margin: 15px
+}
+h4 {
+ justify-content: flex-end;
+
 }
