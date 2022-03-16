@@ -8,6 +8,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
+
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
@@ -18,15 +19,17 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
+  const date = new Date();
+console.log(date)
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
   const full_name = req.body.full_name
   const email = req.body.email
 //added email and full name to send to database
-  const queryText = `INSERT INTO "user" (username, password, email, full_name )
-    VALUES ($1, $2, $3, $4) RETURNING id`;
+  const queryText = `INSERT INTO "user" (username, password, email, full_name, date_created)
+    VALUES ($1, $2, $3, $4, $5) RETURNING id`;
   pool
-    .query(queryText, [username, password, email, full_name])
+    .query(queryText, [username, password, email, full_name, date])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
