@@ -1,8 +1,10 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useState } from 'react';
 import {useSelector} from 'react-redux';
 import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
 import './UserPage.css';
 import { useDispatch } from 'react-redux'
 import { HashRouter as Router, useHistory } from 'react-router-dom';
@@ -19,7 +21,8 @@ function UserPage() {
   const month = currentTime.getMonth()+ 1;
   const day = currentTime.getDate();
   const dayOfWeekName = new Date().toLocaleString('default', {weekday: 'long'});
-
+ //date_time for input
+ const [date, setDate] = React.useState(date);
   //Local states for input fields:
 	const [description, setDescription] = useState('');
 	const [notes, setNotes] = useState('');
@@ -34,9 +37,10 @@ function handleSubmit (event){
     payload: {
       description: description,
       notes: notes,
-      ref_ro_nu: ref,
-      time_actual: hrsPaid,
-      time_actual: hrsActual
+      ref_ro_num: ref,
+      time_paid: hrsPaid,
+      time_actual: hrsActual,
+      date: date
     },
   });
   // history.push('/next page');
@@ -44,9 +48,7 @@ function handleSubmit (event){
   return (
     <div className="container">
       <div className="hrsBilledDate">
-        <p>{dayOfWeekName}</p>
-        <br></br>
-      <p>{month}/{day}</p>
+      <h4>Hours Last Week</h4>...............
       <h4>Hours this week</h4>
       </div>
       <form
@@ -69,10 +71,16 @@ function handleSubmit (event){
       <TextField fullWidth label="Hours Actual" id="fullWidth" variant="outlined" margin="normal"
       value={hrsActual} onChange={(event) => setHrsActual(event.target.value)}
       />
-      {/* //Photo Upload option saved for future use  */}
-      {/* <TextField fullWidth label="Photo Upload" id="fullWidth" variant="outlined" margin="normal"
-      value={ref} onChange={(event) => setRef(event.target.value)}
-      /> */}
+<LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker
+        label="Date"
+          value={date}
+          onChange={(newDate) => {
+            setDate(newDate);
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+        </LocalizationProvider>
       </div>
       <IconButton aria-label="Submit" type='submit'>
   <DoubleArrowIcon />
