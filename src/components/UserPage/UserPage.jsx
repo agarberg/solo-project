@@ -14,15 +14,15 @@ import IconButton from '@mui/material/IconButton';
 function UserPage() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((store) => store.user);
 
   //get Time/Date for display on DOM
-  const user = useSelector((store) => store.user);
   const currentTime = new Date();
-  const month = currentTime.getMonth()+ 1;
-  const day = currentTime.getDate();
-  const dayOfWeekName = new Date().toLocaleString('default', {weekday: 'long'});
- //date_time for input
- const [date, setDate] = React.useState(date);
+  // const month = currentTime.getMonth()+ 1;
+  // const day = currentTime.getDate();
+  // const dayOfWeekName = new Date().toLocaleString('default', {weekday: 'long'});
+  //date_time for input
+  const [date, setDate] = React.useState(date);
   //Local states for input fields:
 	const [description, setDescription] = useState('');
 	const [notes, setNotes] = useState('');
@@ -41,10 +41,16 @@ function handleSubmit (event){
       time_paid: hrsPaid,
       time_actual: hrsActual,
       date: date
-    },
-  });
+    }});
+    setHrsActual('');
+    setHrsPaid('');
+    setRef('');
+    setNotes('');
+    setDescription('');
+  }
+  
   // history.push('/next page');
-}
+
   return (
     <div className="container">
       <div className="hrsBilledDate">
@@ -74,7 +80,7 @@ function handleSubmit (event){
 <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         label="Date"
-          value={date}
+          value={currentTime}
           onChange={(newDate) => {
             setDate(newDate);
           }}
