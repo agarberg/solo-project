@@ -4,21 +4,22 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
-router.get('/', (req, res) => {
-  // Send back user object from the session (previously queried from the database)
-  res.send(req.user);
-});
+router.get('/get', (req, res) => {
+//   res.send(req.user);
+//   console.log(req.user)
+  let id = req.user.id
+  queryText = `SELECT * FROM "jobs" WHERE "user_id" = $1 ORDER BY "date" ASC`;
+  queryValue = [id]
+  pool.query(queryText, queryValue).then(result => res.send(result.rows))
+  .catch(err => {
+    console.log('ERROR in GET', err);
+    res.sendStatus(500);
+  }); 
 
+});
 
 router.post('/post', (req, res) => {
 console.log(req.body) 
-
-    // description: 'Description',
-    // notes: 'Notes',
-    // ref_ro_num: '123456',
-    // time_paid: '1',
-    // time_actual: '.1'
-
 const userId = req.user.id;
 const queryText = `INSERT INTO "jobs" (description, notes, ref_ro_num, time_paid, time_actual, user_id, date)
     VALUES ($1, $2, $3, $4, $5, $6, $7)`;

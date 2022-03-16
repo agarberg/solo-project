@@ -35,7 +35,9 @@ function Nav() {
             <LogOutButton className="navLink" />
           </>
         )}
-
+        <Link className="navLink" to="/history">
+          History
+        </Link>
         <Link className="navLink" to="/about">
           About
         </Link>

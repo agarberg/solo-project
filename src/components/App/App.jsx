@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-
+import History from '../History/History';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
@@ -67,7 +67,12 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
-
+          <ProtectedRoute
+            // exact
+            path="/history"
+          >
+            <History />
+          </ProtectedRoute>
           <Route
             exact
             path="/login"
