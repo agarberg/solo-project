@@ -57,9 +57,7 @@ function handleSubmit (event){
       <h4>Hours Last Week</h4>...............
       <h4>Hours this week</h4>
       </div>
-      <form
-							onSubmit={handleSubmit}
-							className='jobSubmitForm'>
+      <form onSubmit={handleSubmit} className='jobSubmitForm'>
       <div className="inputFields">
       <TextField fullWidth 
       label="Job Description" id="fullWidth" variant="outlined" multiline maxRows={2}

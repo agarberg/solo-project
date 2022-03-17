@@ -6,6 +6,7 @@ import { HashRouter as Router, useHistory } from 'react-router-dom';
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 function History(props) {
+  const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({type: 'GET_JOB_HISTORY'})
@@ -15,7 +16,6 @@ function History(props) {
   // a default value of 'Functional Component'
   const jobs = useSelector((store) => store.job);
 
-
 function getDetails(jobId){
   console.log("clicked", jobId)
         dispatch({
@@ -24,13 +24,11 @@ function getDetails(jobId){
                 jobId
             }
         })
-        history.push('/Details')
+        history.push('/details')
     }
-
 
   return (
     <> 
-  {/* <h4>History</h4> */}    
 <table>
   <tr>
     <th>Description</th>
@@ -46,17 +44,6 @@ function getDetails(jobId){
         </tr>
       );
 })}
-
-
-
-  {/* </tr>
-  {jobs.map((jobs => {
-    <tr key={jobs.id}>
-    <td>{jobs.description}</td>
-    <td>{jobs.notes}</td>
-    <td>{jobs.date}</td>
-  </tr> */}
-   
 </table>
         </>            
         )
