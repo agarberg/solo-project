@@ -33,7 +33,20 @@ pool
     });
 });
 
-
+router.get('/:id', (req, res) => {
+    //   res.send(req.user);
+    //   console.log(req.user)
+    const jobId = req.params.id
+      let userId = req.user.id
+      queryText = `SELECT * FROM "jobs" WHERE "user_id" = $1 AND "id" = $2`;
+      queryValue = [userId, jobId]
+      pool.query(queryText, queryValue).then(result => res.send(result.rows))
+      .catch(err => {
+        console.log('ERROR in GET', err);
+        res.sendStatus(500);
+      }); 
+    
+    });
 
 
 module.exports = router;

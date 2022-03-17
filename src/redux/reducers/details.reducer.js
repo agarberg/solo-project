@@ -1,6 +1,6 @@
-const jobReducer = (state = [], action) => {
+const detailsReducer = (state = [], action) => {
     switch (action.type) {
-        case 'REDUCE_JOBS':
+        case 'SET_DETAILS':
             return action.payload;
         default:
             return state;
@@ -8,5 +8,5 @@ const jobReducer = (state = [], action) => {
 }
 
 
-export default jobReducer;
+export default detailsReducer;
 

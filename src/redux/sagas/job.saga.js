@@ -21,9 +21,25 @@ function* getJobs() {
     }
   }
 
+  function* getDetails(jobId){
+    try {
+        console.log(jobId.payload.jobId)
+        const jobDetails = yield axios.get(`/api/job/${jobId.payload.jobId}`);
+        console.log('get details:', jobDetails);
+        //we got the data, dispatch to details reducer
+        console.log(jobDetails.data)
+        yield put({type: 'SET_DETAILS', payload: jobDetails.data});
+    } 
+    catch {
+        console.log('Getting DETAILS error');
+    }
+}
+
+
 function* jobSaga() {
   yield takeLatest('SET_NEW_JOB', setJob);
   yield takeLatest('GET_JOB_HISTORY', getJobs);
+  yield takeLatest('GET_DETAILS', getDetails)
 }
 
 export default jobSaga;

@@ -1,7 +1,7 @@
-import { getAccordionDetailsUtilityClass } from '@mui/material';
+
 import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-
+import { HashRouter as Router, useHistory } from 'react-router-dom';
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
@@ -15,7 +15,7 @@ function History(props) {
   // a default value of 'Functional Component'
   const jobs = useSelector((store) => store.job);
 
-  console.log(jobs)
+
 function getDetails(jobId){
   console.log("clicked", jobId)
         dispatch({
@@ -24,7 +24,7 @@ function getDetails(jobId){
                 jobId
             }
         })
-        // history.push('/Details')
+        history.push('/Details')
     }
 
 
@@ -37,16 +37,15 @@ function getDetails(jobId){
     <th>Notes</th>
     <th>Date</th>
   </tr>
-
-    {jobs.map((jobs, i) => {
-                    return (
-                        <tr key={jobs.id}onClick={getDetails(jobs.id)}>
-                            <td>{jobs.description}</td>
-                            <td>{jobs.notes}</td>
-                            <td>{jobs.date}</td>
-                        </tr>
-                    );
-                  })}
+{jobs.map((jobs, i) => {
+      return (
+        <tr key={jobs.id} onClick={() => getDetails(jobs.id)}>
+          <td>{jobs.description}</td>
+          <td>{jobs.notes}</td>
+          <td>{jobs.date}</td>
+        </tr>
+      );
+})}
 
 
 
