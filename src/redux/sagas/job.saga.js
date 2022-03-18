@@ -20,6 +20,11 @@ function* getJobs() {
   
     }
   }
+// function* deleteJob(jobToDelete){
+//     console.log (jobToDelete)
+// }
+
+
 
   function* getDetails(jobId){
     try {
@@ -40,6 +45,8 @@ function* jobSaga() {
   yield takeLatest('SET_NEW_JOB', setJob);
   yield takeLatest('GET_JOB_HISTORY', getJobs);
   yield takeLatest('GET_DETAILS', getDetails)
+//   yield takeLatest('DELETE_JOB', deleteJob)
+  
 }
 
 export default jobSaga;

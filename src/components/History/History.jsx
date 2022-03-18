@@ -30,11 +30,14 @@ function getDetails(jobId){
   return (
     <> 
 <table>
+  <thead> 
   <tr>
     <th>Description</th>
     <th>Notes</th>
     <th>Date</th>
   </tr>
+  </thead>
+  <tbody>
 {jobs.map((jobs, i) => {
       return (
         <tr key={jobs.id} onClick={() => getDetails(jobs.id)}>
@@ -44,6 +47,7 @@ function getDetails(jobId){
         </tr>
       );
 })}
+</tbody>
 </table>
         </>            
         )
