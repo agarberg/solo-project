@@ -2,29 +2,37 @@
 import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { HashRouter as Router, useHistory } from 'react-router-dom';
+import DetailsPage from '../DetailsPage/DetailsPage';
+
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
-function History(props) {
+function History() {
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({type: 'GET_JOB_HISTORY'})
   }, []);
 
+
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
   const jobs = useSelector((store) => store.job);
+  // const [job, setJob] = useState({})
 
-function getDetails(jobId){
-  console.log("clicked", jobId)
+function getDetails(clickJob){ 
+  console.log("clicked", clickJob)
+// clickJob = setJob;
+history.push('/details')
+  
+
         dispatch({
             type: 'GET_DETAILS',
             payload: {
-                jobId
+                clickJob
             }
         })
-        history.push('/details')
+        
     }
 
   return (
@@ -49,6 +57,7 @@ function getDetails(jobId){
 })}
 </tbody>
 </table>
+{/* <DetailsPage job={job}/> */}
         </>            
         )
 }

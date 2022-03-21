@@ -77,7 +77,7 @@ function App() {
             // exact
             path="/details"
           >
-            <DetailsPage />
+           <DetailsPage/>
           </ProtectedRoute>
           <Route
             exact

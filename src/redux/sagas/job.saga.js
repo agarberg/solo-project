@@ -1,5 +1,8 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import {  useHistory } from 'react-router-dom';
+
+
 
 function* setJob(action) {
   try {
@@ -11,6 +14,7 @@ function* setJob(action) {
   }
 }
 function* getJobs() {
+
     try {
       const jobs = yield axios.get('/api/job/get');
       console.log(jobs.data)
@@ -28,15 +32,17 @@ function* getJobs() {
 
   function* getDetails(jobId){
     try {
-        console.log(jobId.payload.jobId)
-        const jobDetails = yield axios.get(`/api/job/${jobId.payload.jobId}`);
+      // const history = useHistory();
+        console.log(jobId.payload.clickJob)
+        const jobDetails = yield axios.get(`/api/job/${jobId.payload.clickJob}`);
         console.log('get details:', jobDetails);
         //we got the data, dispatch to details reducer
         console.log(jobDetails.data)
         yield put({type: 'SET_DETAILS', payload: jobDetails.data});
+        // yield history.push ('/details')
     } 
-    catch {
-        console.log('Getting DETAILS error');
+    catch(error) {
+      alert('Error sending job:', error);
     }
 }
 
