@@ -12,66 +12,73 @@ import History from '../History/History';
 import { getDateRangePickerDayUtilityClass } from '@mui/lab';
 
 
-
-
 function DetailsPage() {
-  useEffect(() => {
-  
-  }, []);
+  	const [description, setDescription] = useState('');
+  	const [notes, setNotes] = useState('');
+  	const [ref, setRef] = useState('');
+  	const [hrsPaid, setHrsPaid] = useState('');
+  	const [hrsActual, setHrsActual] = useState('');
 
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector((store) => store.user);
     const details = useSelector((store) => store.details);
-    // const [description, setDescription] = useState('Loading!');
     console.log (details)
-    // setDescription (details)
+    const userId = user.id
+    let jobId = details[0]?.id
+    // console.log(userId)
+    console.log(jobId)
 
 
-    // description = (details[0].description)
-// getData = async () => {
-//     const description = await fetch(details[0].description)
-//     then(response => response.json());
-// }
-    function handleChange(event) {
-        dispatch({ 
-                    type: 'EDIT_ONCHANGE', 
-                    payload: { property: 'description', value: event.target.value }
-                });
-      }  
+      function handleSubmit(event) {
+      event.preventDefault();
+      dispatch({
+        type: 'EDIT_DETAILS',
+        payload: {
+          description: description,
+          notes: notes,
+          ref_ro_num: ref,
+          time_paid: hrsPaid,
+          time_actual: hrsActual,
+          user_id: userId,
+          id: details[0].id,
+        }})
+        setHrsActual('');
+        setHrsPaid('');
+        setRef('');
+        setNotes('');
+        setDescription('');
+        history.push('/history')
+        }
 
       function deleteJob(){
-        // dispatch({
-        //     type: 'DELETE_JOB',
-        //     payload: {
-        //         details
-        //     }
-        // })
-        // history.push('/history')
+        dispatch({
+            type: 'DELETE_JOB',
+            payload: {
+              jobId
+            }
+        })
+        history.push('/history')
       }
-      
-      function handleSubmit(event) {
-        event.preventDefault();
-    
-      };
-
 
   return (
-    
-
-    <div className="container">
-    <form onSubmit={handleSubmit}>
-        <input
-          onChange={(event) => handleChange(event)}
-          value={details[0]?.description}
-        />
-
-        <input type='submit' value='Update' />
+    <>
+      <form onSubmit={handleSubmit} className='editForm'>
+      <TextField fullWidth label={details[0]?.description} id="fullWidth" variant="outlined" multiline maxRows={2}
+      onChange={(event) => setDescription(event.target.value)}/>
+      <TextField fullWidth label={details[0]?.notes} id="fullWidth" variant="outlined" multiline maxRows={2} margin="normal"
+      onChange={(event) => setNotes(event.target.value)}/>
+      <TextField fullWidth label={details[0]?.ref} id="fullWidth" variant="outlined" margin="normal"
+      onChange={(event) => setRef(event.target.value)}/>
+      <TextField fullWidth label={details[0]?.hrsPaid} id="fullWidth" variant="outlined" margin="normal"
+      onChange={(event) => setHrsPaid(event.target.value)}/>
+      <TextField fullWidth label={details[0]?.hrsActual} id="fullWidth" variant="outlined" margin="normal"
+      onChange={(event) => setHrsActual(event.target.value)}/>
+      <input type='submit' value='Update' />
       </form>
-</div>
- 
-  
-      
-);
+      <button onClick={deleteJob}>Delete</button>
+      </>
+)
 }
+
       export default DetailsPage;

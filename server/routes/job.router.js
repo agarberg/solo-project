@@ -47,8 +47,10 @@ router.get('/:id', (req, res) => {
       }); 
     
     });
-router.delete('/:id', (req, res) => {
-    pool.query('DELETE FROM "jobs" WHERE id=$1', [req.params.id]).then((result) => {
+router.delete('/delete/:id', (req, res) => {
+  console.log(req.params)
+    pool.query(`DELETE FROM "jobs" WHERE "id"=$1`, [req.params.id])
+    .then((result) => {
         res.sendStatus(200);
     }).catch((error) => {
         console.log('Error deleting', error);
@@ -56,5 +58,24 @@ router.delete('/:id', (req, res) => {
         })
     });
     
+    router.put('/:id', (req, res) => {
+      // Update this single job 
+      const userId = req.user.id;
+      console.log(req.user.id)
+      console.log(req.body)
+      const queryText = `UPDATE "jobs" SET description = $1, notes = $2, ref_ro_num = $3, 
+      time_paid = $4, time_actual = $5 
+      WHERE id = $6`;
+      pool
+          .query(queryText, [req.body.description, req.body.notes, req.body.ref_ro_num,
+              req.body.time_paid, req.body.time_actual, req.body.id ])
+          .then((result) => {
+              res.sendStatus(200);
+          })
+          .catch((error) => {
+              console.log(`Error making database update query`, error);
+              res.sendStatus(500);
+          });
+  });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import {  useHistory } from 'react-router-dom';
+import { connectAdvanced } from 'react-redux';
 
 
 
@@ -10,11 +11,9 @@ function* setJob(action) {
     yield put({ type: 'SET_JOB', payload: action.payload });
   } catch (error) {
     alert('Error sending job:', error);
-
   }
 }
 function* getJobs() {
-
     try {
       const jobs = yield axios.get('/api/job/get');
       console.log(jobs.data)
@@ -27,19 +26,41 @@ function* getJobs() {
 // function* deleteJob(jobToDelete){
 //     console.log (jobToDelete)
 // }
+  function* editDetails(editedDetails){
+    const history = useHistory();
+    console.log(editedDetails.payload)
+    axios.put(`/api/job/${editedDetails.payload.user_id}`, editedDetails.payload)
+        .then( response => {
 
+            history.push('/history'); // back to history page
+        })
+        .catch(error => {
+            console.log('error on PUT: ', error);
+        })
+  };
 
+  function* deleteJob(jobId){
+    console.log(jobId.payload.jobId)
+    axios.delete(`/api/job/delete/${jobId.payload.jobId}`)
+        .then( response => {
+          console.log('delete request sent')
+        })
+        .catch(error => {
+            console.log('error on PUT: ', error);
+        })
+
+  }
+  
+  
 
   function* getDetails(jobId){
     try {
-      // const history = useHistory();
         console.log(jobId.payload.clickJob)
         const jobDetails = yield axios.get(`/api/job/${jobId.payload.clickJob}`);
         console.log('get details:', jobDetails);
         //we got the data, dispatch to details reducer
         console.log(jobDetails.data)
         yield put({type: 'SET_DETAILS', payload: jobDetails.data});
-        // yield history.push ('/details')
     } 
     catch(error) {
       alert('Error sending job:', error);
@@ -51,7 +72,9 @@ function* jobSaga() {
   yield takeLatest('SET_NEW_JOB', setJob);
   yield takeLatest('GET_JOB_HISTORY', getJobs);
   yield takeLatest('GET_DETAILS', getDetails)
-//   yield takeLatest('DELETE_JOB', deleteJob)
+  yield takeLatest('EDIT_DETAILS', editDetails)
+  yield takeLatest('DELETE_JOB', deleteJob)
+
   
 }
 
