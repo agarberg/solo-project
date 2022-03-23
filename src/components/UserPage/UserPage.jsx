@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import {useSelector} from 'react-redux';
 import TextField from '@mui/material/TextField';
@@ -15,6 +15,12 @@ function UserPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((store) => store.user);
+  const hoursHistory = useSelector((store) => store.hoursHistory)
+
+  useEffect(() => {
+    dispatch({ type: 'GET_WEEKLY_HOURS' });
+  }, []);
+
 
   //get Time/Date for display on DOM
   const currentTime = new Date();
@@ -22,13 +28,16 @@ function UserPage() {
   // const day = currentTime.getDate();
   // const dayOfWeekName = new Date().toLocaleString('default', {weekday: 'long'});
   //date_time for input
-  const [date, setDate] = React.useState(date);
+  const [date, setDate] = React.useState(currentTime);
   //Local states for input fields:
 	const [description, setDescription] = useState('');
 	const [notes, setNotes] = useState('');
 	const [ref, setRef] = useState('');
 	const [hrsPaid, setHrsPaid] = useState('');
 	const [hrsActual, setHrsActual] = useState('');
+
+
+  console.log(hoursHistory[0].weekly_hours)
 
 function handleSubmit (event){
   event.preventDefault();
@@ -40,7 +49,7 @@ function handleSubmit (event){
       ref_ro_num: ref,
       time_paid: hrsPaid,
       time_actual: hrsActual,
-      date: date
+      date: date,
     }});
     setHrsActual('');
     setHrsPaid('');
@@ -54,8 +63,8 @@ function handleSubmit (event){
   return (
     <div className="container">
       <div className="hrsBilledDate">
-      <h4>Hours Last Week</h4>...............
-      <h4>Hours this week</h4>
+      <h4>Hours Last Week: {hoursHistory[1].weekly_hours}</h4>...............
+        <h4>Hours this week {hoursHistory[0].weekly_hours}</h4>
       </div>
       <form onSubmit={handleSubmit} className='jobSubmitForm'>
       <div className="inputFields">
@@ -78,7 +87,7 @@ function handleSubmit (event){
 <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         label="Date"
-          value={currentTime}
+          value={date}
           onChange={(newDate) => {
             setDate(newDate);
           }}

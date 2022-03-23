@@ -13,11 +13,11 @@ import { getDateRangePickerDayUtilityClass } from '@mui/lab';
 
 
 function DetailsPage() {
-  	const [description, setDescription] = useState('');
-  	const [notes, setNotes] = useState('');
-  	const [ref, setRef] = useState('');
-  	const [hrsPaid, setHrsPaid] = useState('');
-  	const [hrsActual, setHrsActual] = useState('');
+  	const [description, setDescription] = useState();
+  	const [notes, setNotes] = useState();
+  	const [ref, setRef] = useState();
+  	const [hrsPaid, setHrsPaid] = useState();
+  	const [hrsActual, setHrsActual] = useState();
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -28,7 +28,8 @@ function DetailsPage() {
     let jobId = details[0]?.id
     // console.log(userId)
     console.log(jobId)
-
+  // console.log(details[0].description)
+  console.log(details.description)
 
       function handleSubmit(event) {
       event.preventDefault();
@@ -43,11 +44,11 @@ function DetailsPage() {
           user_id: userId,
           id: details[0].id,
         }})
-        setHrsActual('');
-        setHrsPaid('');
-        setRef('');
-        setNotes('');
-        setDescription('');
+        // setHrsActual('');
+        // setHrsPaid('');
+        // setRef('');
+        // setNotes('');
+        // setDescription('');
         history.push('/history')
         }
 

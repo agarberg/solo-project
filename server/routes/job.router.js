@@ -8,14 +8,14 @@ router.get('/get', (req, res) => {
 //   res.send(req.user);
 //   console.log(req.user)
   let id = req.user.id
-  queryText = `SELECT * FROM "jobs" WHERE "user_id" = $1 ORDER BY "date" ASC`;
+  queryText = `SELECT id, user_id, description, time_actual, time_paid, notes, ref_ro_num, to_char("date", 'FMMM/FMDD/FMYY') AS "date"  
+  FROM "jobs" WHERE "user_id" = $1 ORDER BY to_char("date", 'MM/DD/YY') DESC`;
   queryValue = [id]
   pool.query(queryText, queryValue).then(result => res.send(result.rows))
   .catch(err => {
     console.log('ERROR in GET', err);
     res.sendStatus(500);
   }); 
-
 });
 
 router.post('/post', (req, res) => {
@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
     //   console.log(req.user)
     const jobId = req.params.id
       let userId = req.user.id
-      queryText = `SELECT * FROM "jobs" WHERE "user_id" = $1 AND "id" = $2`;
+      queryText = `SELECT * FROM "jobs" WHERE "user_id" = $1 AND "id" = $2 ORDER BY to_char("date", 'MM/DD/YY') DESC`;
       queryValue = [userId, jobId]
       pool.query(queryText, queryValue).then(result => res.send(result.rows))
       .catch(err => {
@@ -77,5 +77,19 @@ router.delete('/delete/:id', (req, res) => {
               res.sendStatus(500);
           });
   });
-
+  router.get('/weekly/:id', (req, res) => {
+    //   res.send(req.user);
+    //   console.log(req.user)
+      let id = req.user.id
+      queryText = `SELECT date_trunc('week', date ) as start_of_week, SUM (time_paid) as weekly_hours
+      FROM jobs WHERE user_id = $1
+      GROUP BY date_trunc('week', date )
+      ORDER BY date_trunc('week', date ) DESC`;
+      queryValue = [id]
+      pool.query(queryText, queryValue).then(result => res.send(result.rows))
+      .catch(err => {
+        console.log('ERROR in GETting weekly hours', err);
+        res.sendStatus(500);
+      }); 
+    });
 module.exports = router;

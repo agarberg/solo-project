@@ -27,12 +27,11 @@ function* getJobs() {
 //     console.log (jobToDelete)
 // }
   function* editDetails(editedDetails){
-    const history = useHistory();
+    // const history = useHistory();
     console.log(editedDetails.payload)
     axios.put(`/api/job/${editedDetails.payload.user_id}`, editedDetails.payload)
         .then( response => {
-
-            history.push('/history'); // back to history page
+          alert('job updated successfully!')
         })
         .catch(error => {
             console.log('error on PUT: ', error);
@@ -52,19 +51,31 @@ function* getJobs() {
   }
   
   
-
-  function* getDetails(jobId){
+  function* getWeeklyHours(userId){
     try {
-        console.log(jobId.payload.clickJob)
-        const jobDetails = yield axios.get(`/api/job/${jobId.payload.clickJob}`);
-        console.log('get details:', jobDetails);
+        console.log(userId.payload)
+        const weeklyHours = yield axios.get(`/api/job/weekly/${userId.payload}`);
         //we got the data, dispatch to details reducer
-        console.log(jobDetails.data)
-        yield put({type: 'SET_DETAILS', payload: jobDetails.data});
+        console.log(weeklyHours.data)
+        yield put({type: 'SET_WEEKLY_HOURS', payload: weeklyHours.data});
     } 
     catch(error) {
-      alert('Error sending job:', error);
+      alert('Error setting hour history:', error);
     }
+}
+
+function* getDetails(jobId){
+  try {
+      console.log(jobId.payload.clickJob)
+      const jobDetails = yield axios.get(`/api/job/${jobId.payload.clickJob}`);
+      console.log('get details:', jobDetails);
+      //we got the data, dispatch to details reducer
+      console.log(jobDetails.data)
+      yield put({type: 'SET_DETAILS', payload: jobDetails.data});
+  } 
+  catch(error) {
+    alert('Error sending job:', error);
+  }
 }
 
 
@@ -74,8 +85,7 @@ function* jobSaga() {
   yield takeLatest('GET_DETAILS', getDetails)
   yield takeLatest('EDIT_DETAILS', editDetails)
   yield takeLatest('DELETE_JOB', deleteJob)
-
-  
+  yield takeLatest('GET_WEEKLY_HOURS', getWeeklyHours)
 }
 
 export default jobSaga;
