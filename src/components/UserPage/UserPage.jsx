@@ -32,9 +32,9 @@ function UserPage() {
   //Local states for input fields:
 	const [description, setDescription] = useState('');
 	const [notes, setNotes] = useState('');
-	const [ref, setRef] = useState('');
-	const [hrsPaid, setHrsPaid] = useState('');
-	const [hrsActual, setHrsActual] = useState('');
+	const [ref, setRef] = useState(null);
+	const [hrsPaid, setHrsPaid] = useState(null);
+	const [hrsActual, setHrsActual] = useState(null);
 
 
   console.log(hoursHistory[0].weekly_hours)
@@ -56,6 +56,7 @@ function handleSubmit (event){
     setRef('');
     setNotes('');
     setDescription('');
+    dispatch({ type: 'GET_WEEKLY_HOURS' });
   }
   
   // history.push('/next page');

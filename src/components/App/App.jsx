@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import PastPerformance from '../PastPerformance/PastPerformance';
 import './App.css';
 
 function App() {
@@ -72,6 +73,14 @@ function App() {
             path="/history"
           >
             <History />
+
+            </ProtectedRoute>
+          <ProtectedRoute
+            // exact
+            path="/pastperformance"
+          >
+     
+            <PastPerformance />
           </ProtectedRoute>
           <ProtectedRoute
             // exact
