@@ -1,6 +1,5 @@
 import Chart from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
-
 import React, {useEffect,useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { HashRouter as Router, useHistory } from 'react-router-dom';
@@ -14,48 +13,49 @@ function PastPerformance (){
     
 const history = useHistory();
 const dispatch = useDispatch();
-const weeklyHours = useSelector((store) => store.weeklyHoursReducer)
-const dailyHours = useSelector((store) => store.dailyHoursReducer)
-const monthlyHours = useSelector((store) => store.monthyHoursReducer)
+const weeklyHours = useSelector((store) => store.hoursHistory.weeklyHours)
+const dailyHours = useSelector((store) => store.hoursHistory.dailyHours)
+const monthlyHours = useSelector((store) => store.hoursHistory.monthlyHours)
 
+// data.data.map((crypto) => crypto.name)
+console.log (weeklyHours)
+console.log (dailyHours)
+console.log (monthlyHours)
 
 const daily = {
-    labels: ['Monday', 'Tuesday', 'Wednesday',
-             'Thursday', 'Friday'],
+    labels: dailyHours?.map((dailyHours) => dailyHours.day),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: [65, 59, 80, 81, 56]
+        data: dailyHours?.map((dailyHours) => dailyHours.daily_hours)
       }
     ]
   }
-
+//   dailyHours?.map((dailyHours) => dailyHours.daily_hours)
   const weekly = {
-    labels: ['Monday', 'Tuesday', 'Wednesday',
-             'Thursday', 'Friday'],
+    labels: weeklyHours?.map((weeklyHours) => weeklyHours.start_of_week),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: []
+        data: weeklyHours?.map((weeklyHours) => weeklyHours.weekly_hours)
       }
     ]
   }
   const monthly = {
-    labels: ['Monday', 'Tuesday', 'Wednesday',
-             'Thursday', 'Friday'],
+    labels: monthlyHours?.map((monthlyHours) => monthlyHours.start_of_month),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: [65, 59, 80, 81, 56]
+        data: monthlyHours?.map((monthlyHours) => monthlyHours.monthly_hours)
       }
     ]
   }

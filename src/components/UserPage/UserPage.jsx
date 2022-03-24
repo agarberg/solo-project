@@ -15,12 +15,11 @@ function UserPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((store) => store.user);
-  const weeklyHours = useSelector((store) => store.weeklyHoursReducer)
+  const weeklyHours = useSelector((store) => store.weeklyHours)
 
   useEffect(() => {
     dispatch({ type: 'GET_WEEKLY_HOURS' });
   }, []);
-
 
   //get Time/Date for display on DOM
   const currentTime = new Date();
@@ -61,13 +60,13 @@ function handleSubmit (event){
     dispatch({ type: 'GET_WEEKLY_HOURS' });
   }
   
-  // history.push('/next page');
+
 
   return (
     <div className="container">
       <div className="hrsBilledDate">
-      {/* <h4>Hours Last Week: {hoursHistory[1]?.weekly_hours}</h4> */}
-        {/* <h4>Hours this week: {hoursHistory[0]?.weekly_hours}</h4> */}
+      <h4>Hours Last Week: {weeklyHours}</h4>
+        <h4>Hours this week: {weeklyHours}</h4>
       </div>
       <form onSubmit={handleSubmit} className='jobSubmitForm'>
       <div className="inputFields">

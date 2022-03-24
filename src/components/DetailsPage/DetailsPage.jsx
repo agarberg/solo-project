@@ -23,6 +23,7 @@ function DetailsPage() {
     const history = useHistory();
     const user = useSelector((store) => store.user);
     const details = useSelector((store) => store.details);
+    const weeklyHours = useSelector((store) => store.weeklyHoursReducer)
     console.log (details)
     const userId = user.id
     let jobId = details[0]?.id
