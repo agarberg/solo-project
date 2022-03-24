@@ -77,19 +77,5 @@ router.delete('/delete/:id', (req, res) => {
               res.sendStatus(500);
           });
   });
-  router.get('/weekly/:id', (req, res) => {
-    //   res.send(req.user);
-    //   console.log(req.user)
-      let id = req.user.id
-      queryText = `SELECT date_trunc('week', date ) as start_of_week, SUM (time_paid) as weekly_hours
-      FROM jobs WHERE user_id = $1
-      GROUP BY date_trunc('week', date )
-      ORDER BY date_trunc('week', date ) DESC`;
-      queryValue = [id]
-      pool.query(queryText, queryValue).then(result => res.send(result.rows))
-      .catch(err => {
-        console.log('ERROR in GETting weekly hours', err);
-        res.sendStatus(500);
-      }); 
-    });
+
 module.exports = router;
