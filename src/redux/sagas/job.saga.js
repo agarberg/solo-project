@@ -49,20 +49,6 @@ function* getJobs() {
         })
 
   }
-  
-  
-  function* getWeeklyHours(userId){
-    try {
-        console.log(userId.payload)
-        const weeklyHours = yield axios.get(`/api/job/weekly/${userId.payload}`);
-        //we got the data, dispatch to details reducer
-        console.log(weeklyHours.data)
-        yield put({type: 'SET_WEEKLY_HOURS', payload: weeklyHours.data});
-    } 
-    catch(error) {
-      alert('Error setting hour history:', error);
-    }
-}
 
 function* getDetails(jobId){
   try {
