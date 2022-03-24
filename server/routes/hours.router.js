@@ -5,10 +5,9 @@ const router = express.Router();
 
 router.get('/weekly/:id', (req, res) => {
   const userId = req.user.id
-  queryText = `SELECT date_trunc('week', date ) as start_of_week, SUM (time_paid) as weekly_hours
+  queryText = `SELECT to_char(date_trunc('week', date ), 'MM/DD') AS "dates" , SUM (time_paid::INT)::VARCHAR "timePaid"
   FROM jobs WHERE "user_id" = $1
-  GROUP BY date_trunc('week', date )
-  ORDER BY date_trunc('week', date ) DESC 
+  GROUP BY "dates"
   LIMIT 5;`
   queryValue = [userId]
   pool.query (queryText, queryValue)

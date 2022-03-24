@@ -18,7 +18,7 @@ const dailyHours = useSelector((store) => store.hoursHistory.dailyHours)
 const monthlyHours = useSelector((store) => store.hoursHistory.monthlyHours)
 
 // data.data.map((crypto) => crypto.name)
-console.log (weeklyHours)
+console.log (weeklyHours.timePaid)
 console.log (dailyHours)
 console.log (monthlyHours)
 
@@ -36,14 +36,14 @@ const daily = {
   }
 //   dailyHours?.map((dailyHours) => dailyHours.daily_hours)
   const weekly = {
-    labels: weeklyHours?.map((weeklyHours) => weeklyHours.start_of_week),
+    labels: weeklyHours?.map((weeklyHours) => weeklyHours.dates),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: weeklyHours?.map((weeklyHours) => weeklyHours.weekly_hours)
+        data: weeklyHours?.map((weeklyHours) => weeklyHours.timePaid)
       }
     ]
   }

@@ -30,7 +30,7 @@ function DetailsPage() {
     // console.log(userId)
     console.log(jobId)
   // console.log(details[0].description)
-  console.log(details.description)
+  console.log(details[0]?.description)
 
       function handleSubmit(event) {
       event.preventDefault();
@@ -45,11 +45,6 @@ function DetailsPage() {
           user_id: userId,
           id: details[0].id,
         }})
-        // setHrsActual('');
-        // setHrsPaid('');
-        // setRef('');
-        // setNotes('');
-        // setDescription('');
         history.push('/history')
         }
 
@@ -66,16 +61,27 @@ function DetailsPage() {
   return (
     <>
       <form onSubmit={handleSubmit} className='editForm'>
-      <TextField fullWidth label={details[0]?.description} id="fullWidth" variant="outlined" multiline maxRows={2}
+
+      <TextField fullWidth id="fullWidth" variant="outlined" multiline maxRows={2}
+      defaultValue={details[0]?.description} helperText="Description"
       onChange={(event) => setDescription(event.target.value)}/>
-      <TextField fullWidth label={details[0]?.notes} id="fullWidth" variant="outlined" multiline maxRows={2} margin="normal"
+
+      <TextField fullWidth id="fullWidth" variant="outlined" multiline maxRows={2} margin="normal"
+      defaultValue={details[0]?.notes} helperText="Notes"
       onChange={(event) => setNotes(event.target.value)}/>
-      <TextField fullWidth label={details[0]?.ref} id="fullWidth" variant="outlined" margin="normal"
+
+      <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
+      defaultValue={details[0]?.ref_ro_num} helperText="Reference Number"
       onChange={(event) => setRef(event.target.value)}/>
-      <TextField fullWidth label={details[0]?.hrsPaid} id="fullWidth" variant="outlined" margin="normal"
+
+      <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
+      defaultValue={details[0]?.hrsPaid} helperText="Hours Paid"
       onChange={(event) => setHrsPaid(event.target.value)}/>
-      <TextField fullWidth label={details[0]?.hrsActual} id="fullWidth" variant="outlined" margin="normal"
+
+      <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
+      defaultValue={details[0]?.hrsActual} helperText="Hours Actual"
       onChange={(event) => setHrsActual(event.target.value)}/>
+
       <input type='submit' value='Update' />
       </form>
       <button onClick={deleteJob}>Delete</button>

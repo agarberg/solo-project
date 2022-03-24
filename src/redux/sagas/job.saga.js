@@ -1,6 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import {  useHistory } from 'react-router-dom';
+import { HashRouter as Router, useHistory } from 'react-router-dom';
 import { connectAdvanced } from 'react-redux';
 
 
@@ -23,11 +23,8 @@ function* getJobs() {
   
     }
   }
-// function* deleteJob(jobToDelete){
-//     console.log (jobToDelete)
-// }
+
   function* editDetails(editedDetails){
-    // const history = useHistory();
     console.log(editedDetails.payload)
     axios.put(`/api/job/${editedDetails.payload.user_id}`, editedDetails.payload)
         .then( response => {
@@ -52,12 +49,15 @@ function* getJobs() {
 
 function* getDetails(jobId){
   try {
+      // const history = useHistory();
+      const { history } = action.payload;
       console.log(jobId.payload.clickJob)
       const jobDetails = yield axios.get(`/api/job/${jobId.payload.clickJob}`);
       console.log('get details:', jobDetails);
       //we got the data, dispatch to details reducer
       console.log(jobDetails.data)
       yield put({type: 'SET_DETAILS', payload: jobDetails.data});
+      history.push('/details')
   } 
   catch(error) {
     alert('Error sending job:', error);
