@@ -41,7 +41,7 @@ function* getMonthlyHours(userId){
     }
 }
 
-function* HoursSaga() {
+function* hoursSaga() {
     yield takeLatest('GET_WEEKLY_HOURS', getWeeklyHours)
     yield takeLatest('GET_DAILY_HOURS', getDailyHours)
     yield takeLatest('GET_MONTHLY_HOURS', getMonthlyHours)
