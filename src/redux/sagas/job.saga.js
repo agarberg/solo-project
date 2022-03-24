@@ -71,7 +71,6 @@ function* jobSaga() {
   yield takeLatest('GET_DETAILS', getDetails)
   yield takeLatest('EDIT_DETAILS', editDetails)
   yield takeLatest('DELETE_JOB', deleteJob)
-  yield takeLatest('GET_WEEKLY_HOURS', getWeeklyHours)
 }
 
 export default jobSaga;

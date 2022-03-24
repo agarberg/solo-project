@@ -6,10 +6,18 @@ import {useSelector, useDispatch} from 'react-redux';
 import { HashRouter as Router, useHistory } from 'react-router-dom';
 
 function PastPerformance (){
+    useEffect(() => {
+        dispatch({ type: 'GET_WEEKLY_HOURS' })
+        dispatch({ type: 'GET_DAILY_HOURS' })
+        dispatch({ type: 'GET_MONTHLY_HOURS' })
+      }, []);
+    
 const history = useHistory();
 const dispatch = useDispatch();
-const hoursHistory = useSelector((store) => store.hoursHistory)
-console.log(hoursHistory[0].weekly_hours)
+const weeklyHours = useSelector((store) => store.weeklyHoursReducer)
+const dailyHours = useSelector((store) => store.dailyHoursReducer)
+const monthlyHours = useSelector((store) => store.monthyHoursReducer)
+
 
 const daily = {
     labels: ['Monday', 'Tuesday', 'Wednesday',
@@ -34,7 +42,7 @@ const daily = {
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: [hoursHistory[0].weekly_hours, hoursHistory[1].weekly_hours]
+        data: []
       }
     ]
   }

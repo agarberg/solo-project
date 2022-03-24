@@ -70,16 +70,13 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute
             // exact
-            path="/history"
-          >
+            path="/history">
             <History />
-
             </ProtectedRoute>
           <ProtectedRoute
             // exact
             path="/pastperformance"
           >
-     
             <PastPerformance />
           </ProtectedRoute>
           <ProtectedRoute

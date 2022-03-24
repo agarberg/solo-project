@@ -8,7 +8,7 @@ function* getWeeklyHours(userId){
         console.log(userId.payload)
         const weeklyHours = yield axios.get(`/api/hours/weekly/${userId.payload}`);
         //we got the data, dispatch to details reducer
-        console.log(weeklyHours.data)
+        console.log(weeklyHours)
         yield put({type: 'SET_WEEKLY_HOURS', payload: weeklyHours.data});
     } 
     catch(error) {
@@ -20,7 +20,7 @@ function* getDailyHours(userId){
         console.log(userId.payload)
         const dailyHours = yield axios.get(`/api/hours/daily/${userId.payload}`);
         //we got the data, dispatch to details reducer
-        console.log(dailyHours.data)
+        console.log(dailyHours)
         yield put({type: 'SET_DAILY_HOURS', payload: dailyHours.data});
     } 
     catch(error) {
@@ -33,7 +33,7 @@ function* getMonthlyHours(userId){
         console.log(userId.payload)
         const monthlyHours = yield axios.get(`/api/hours/monthly/${userId.payload}`);
         //we got the data, dispatch to details reducer
-        console.log(monthlyHours.data)
+        console.log(monthlyHours)
         yield put({type: 'SET_MONTHLY_HOURS', payload: monthlyHours.data});
     } 
     catch(error) {

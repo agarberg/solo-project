@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 
-const weeklyHistoryReducer = (state = [''], action) => {
+const weeklyHoursReducer = (state = [''], action) => {
     switch (action.type) {
         case 'SET_WEEKLY_HOURS':
             console.log(action.payload)
@@ -13,7 +13,7 @@ const weeklyHistoryReducer = (state = [''], action) => {
 
 const dailyHoursReducer = (state = [''], action) => {
     switch (action.type) {
-        case 'GET_DAILY_HOURS':
+        case 'SET_DAILY_HOURS':
             console.log(action.payload)
             return action.payload;
         default:
@@ -23,7 +23,7 @@ const dailyHoursReducer = (state = [''], action) => {
 
 const monthyHoursReducer = (state = [''], action) => {
     switch (action.type) {
-        case 'GET_MONTHLY_HOURS':
+        case 'SET_MONTHLY_HOURS':
             console.log(action.payload)
             return action.payload;
         default:
@@ -32,7 +32,7 @@ const monthyHoursReducer = (state = [''], action) => {
 };
 
 export default combineReducers({
-    weeklyHistoryReducer,
+    weeklyHoursReducer,
     dailyHoursReducer,
     monthyHoursReducer,
   });
