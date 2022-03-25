@@ -21,41 +21,42 @@ const monthlyHours = useSelector((store) => store.hoursHistory.monthlyHours)
 console.log (weeklyHours.timePaid)
 console.log (dailyHours)
 console.log (monthlyHours)
+console.log (dailyHours.dailyHours)
 
 const daily = {
-    labels: dailyHours?.map((dailyHours) => dailyHours.day),
+    labels: dailyHours?.map((dailyHours) => dailyHours?.dailyhours),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: dailyHours?.map((dailyHours) => dailyHours.daily_hours)
+        data: dailyHours?.map((dailyHours) => dailyHours?.timePaid)
       }
     ]
   }
 //   dailyHours?.map((dailyHours) => dailyHours.daily_hours)
   const weekly = {
-    labels: weeklyHours?.map((weeklyHours) => weeklyHours.dates),
+    labels: weeklyHours?.map((weeklyHours) => weeklyHours?.dates),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: weeklyHours?.map((weeklyHours) => weeklyHours.timePaid)
+        data: weeklyHours?.map((weeklyHours) => weeklyHours?.timePaid)
       }
     ]
   }
   const monthly = {
-    labels: monthlyHours?.map((monthlyHours) => monthlyHours.monthlydates),
+    labels: monthlyHours?.map((monthlyHours) => monthlyHours?.monthlydates),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: monthlyHours?.map((monthlyHours) => monthlyHours.timePaid)
+        data: monthlyHours?.map((monthlyHours) => monthlyHours?.timePaid)
       }
     ]
   }

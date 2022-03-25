@@ -21,10 +21,11 @@ router.get('/weekly/:id', (req, res) => {
 
 router.get('/daily/:id', (req, res) => {
   const userId = req.user.id
-  queryText = `SELECT date_trunc('day', date ) as day, SUM (time_paid) as daily_hours
+  queryText = `SELECT to_Char(date_trunc('day', date ), 'MM/DD') AS "dailyhours", 
+  SUM(time_paid::INT)::VARCHAR"timePaid" 
   FROM jobs WHERE "user_id" = $1
-  GROUP BY date_trunc('day', date )
-  ORDER BY date_trunc('day', date ) DESC 
+  GROUP BY dailyhours
+  ORDER BY dailyhours DESC 
   LIMIT 5;`
   queryValue = [userId]
   pool.query (queryText, queryValue)
