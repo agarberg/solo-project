@@ -22,17 +22,17 @@ function History() {
 
 function getDetails(clickJob){ 
   console.log("clicked", clickJob)
-  const { history } = this.props;
+  // const { history } = this.props;
 
 
         dispatch({
             type: 'GET_DETAILS',
             payload: {
-                clickJob, history
+                clickJob
             }
 
         })
-        // history.push('/details')
+        history.push('/details')
     }
 
   return (

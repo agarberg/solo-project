@@ -49,15 +49,12 @@ function* getJobs() {
 
 function* getDetails(jobId){
   try {
-      // const history = useHistory();
-      const { history } = action.payload;
       console.log(jobId.payload.clickJob)
       const jobDetails = yield axios.get(`/api/job/${jobId.payload.clickJob}`);
       console.log('get details:', jobDetails);
       //we got the data, dispatch to details reducer
       console.log(jobDetails.data)
       yield put({type: 'SET_DETAILS', payload: jobDetails.data});
-      history.push('/details')
   } 
   catch(error) {
     alert('Error sending job:', error);
