@@ -23,6 +23,7 @@ console.log (dailyHours)
 console.log (monthlyHours)
 console.log (dailyHours.dailyHours)
 
+Chart.defaults.font.size = 18;
 const daily = {
     labels: dailyHours?.map((dailyHours) => dailyHours?.dailyhours),
     datasets: [
@@ -35,7 +36,7 @@ const daily = {
       }
     ]
   }
-//   dailyHours?.map((dailyHours) => dailyHours.daily_hours)
+
   const weekly = {
     labels: weeklyHours?.map((weeklyHours) => weeklyHours?.dates),
     datasets: [
@@ -66,45 +67,38 @@ const daily = {
         <Bar
         data={daily}
         options={{
-          title:{
-            display:true,
-            text:'Daily Hours',
-            fontSize:20
-          },
-          legend:{
-            display:true,
-            position:'right'
-          }
-        }}
+            plugins: {
+            legend: {
+                display: false},
+            title: {
+                display: true,
+                text: "Daily Production"
+              },
+          }}}
       />
       <Bar
       data={weekly}
       options={{
-        title:{
-          display:true,
-          text:'Weekly Hours',
-          fontSize:20
-        },
-        legend:{
-          display:true,
-          position:'right'
-        }
-      }}
+        plugins: {
+        legend: {
+            display: false},
+        title: {
+            display: true,
+            text: "Weekly Production"
+          },
+      }}}
     />
     <Bar
     data={monthly}
     options={{
-      title:{
-        display:true,
-        text:'Monthly Hours',
-        fontSize:20,
-        align:'center'
-      },
-      legend:{
-        display:true,
-        position:'right'
-      }
-    }}
+        plugins: {
+            legend: {
+            display: false},
+          title: {
+            display: true,
+            text: "Monthly Production"
+          },
+      }}}
   />
   </>
     )
