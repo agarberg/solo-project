@@ -97,7 +97,8 @@ const daily = {
       title:{
         display:true,
         text:'Monthly Hours',
-        fontSize:20
+        fontSize:20,
+        align:'center'
       },
       legend:{
         display:true,

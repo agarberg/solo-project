@@ -65,8 +65,8 @@ function handleSubmit (event){
   return (
     <div className="container">
       <div className="hrsBilledDate">
-      <h4>Hours Last Week: {weeklyHours[1]?.weekly_hours}</h4>
-        <h4>Hours this week: {weeklyHours[0]?.weekly_hours}</h4>
+      <h4>Hours Last Week: {weeklyHours[1]?.timePaid}</h4>
+        <h4>Hours this week: {weeklyHours[0]?.timePaid}</h4>
       </div>
       <form onSubmit={handleSubmit} className='jobSubmitForm'>
       <div className="inputFields">
