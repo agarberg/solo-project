@@ -36,13 +36,14 @@ router.get('/daily/:id', (req, res) => {
   })
 
 router.get('/monthly/:id', (req, res) => {
-  const userId = req.user.id
-  queryText = `SELECT date_trunc('month', date ) as start_of_month, SUM (time_paid) as monthly_hours
+  const userId = req.user.id;
+  queryText = `SELECT to_Char(date_trunc('month', date ), 'MM/DD') AS "monthlydates", 
+  SUM(time_paid::INT)::VARCHAR "timePaid"
   FROM jobs WHERE "user_id" = $1
-  GROUP BY date_trunc('month', date )
-  ORDER BY date_trunc('month', date ) DESC 
-  LIMIT 6;` 
-  queryValue = [userId]
+  GROUP BY monthlydates
+  ORDER BY monthlydates DESC 
+  LIMIT 6;`; 
+  queryValue = [userId];
   pool.query (queryText, queryValue)
   .then(result => res.send(result.rows))
   .catch((error) => {

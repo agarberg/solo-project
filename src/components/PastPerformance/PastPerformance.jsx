@@ -48,14 +48,14 @@ const daily = {
     ]
   }
   const monthly = {
-    labels: monthlyHours?.map((monthlyHours) => monthlyHours.start_of_month),
+    labels: monthlyHours?.map((monthlyHours) => monthlyHours.monthlydates),
     datasets: [
       {
         label: 'Hours',
         backgroundColor: 'rgba(75,192,192,1)',
         borderColor: 'rgba(0,0,0,1)',
         borderWidth: 2,
-        data: monthlyHours?.map((monthlyHours) => monthlyHours.monthly_hours)
+        data: monthlyHours?.map((monthlyHours) => monthlyHours.timePaid)
       }
     ]
   }
