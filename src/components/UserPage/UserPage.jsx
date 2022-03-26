@@ -96,10 +96,10 @@ function handleSubmit (event){
           renderInput={(params) => <TextField {...params} />}
         />
         </LocalizationProvider>
-      </div>
       <IconButton aria-label="Submit" type='submit'>
   <DoubleArrowIcon />
   </IconButton>
+  </div>
       </form>
 
 

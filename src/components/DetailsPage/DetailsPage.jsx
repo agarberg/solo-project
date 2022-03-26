@@ -46,6 +46,9 @@ function DetailsPage() {
           id: details[0].id,
         }})
         history.push('/history')
+        dispatch({
+          type: 'GET_JOB_HISTORY',
+          })
         }
 
       function deleteJob(){
@@ -57,7 +60,7 @@ function DetailsPage() {
         })
         history.push('/history')
       }
-
+console.log (details[0])
   return (
     <>
       <form onSubmit={handleSubmit} className='editForm'>
@@ -75,11 +78,11 @@ function DetailsPage() {
       onChange={(event) => setRef(event.target.value)}/>
 
       <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
-      defaultValue={details[0]?.hrsPaid} helperText="Hours Paid"
+      defaultValue={details[0]?.time_paid} helperText="Hours Paid"
       onChange={(event) => setHrsPaid(event.target.value)}/>
 
       <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
-      defaultValue={details[0]?.hrsActual} helperText="Hours Actual"
+      defaultValue={details[0]?.time_actual} helperText="Hours Actual"
       onChange={(event) => setHrsActual(event.target.value)}/>
 
       <input type='submit' value='Update' />

@@ -23,7 +23,7 @@ console.log (dailyHours)
 console.log (monthlyHours)
 console.log (dailyHours.dailyHours)
 
-Chart.defaults.font.size = 18;
+Chart.defaults.font.size = 15;
 const daily = {
     labels: dailyHours?.map((dailyHours) => dailyHours?.dailyhours),
     datasets: [
@@ -64,6 +64,7 @@ const daily = {
   
     return (
         <>
+        <div className="charts">
         <Bar
         data={daily}
         options={{
@@ -100,6 +101,7 @@ const daily = {
           },
       }}}
   />
+  </div>
   </>
     )
 }
