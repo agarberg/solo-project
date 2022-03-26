@@ -42,6 +42,7 @@ function getDetails(clickJob){
   <tr>
     <th>Description</th>
     <th>Notes</th>
+    <th>Hours</th>
     <th>Date</th>
   </tr>
   </thead>
@@ -51,6 +52,7 @@ function getDetails(clickJob){
         <tr key={jobs.id} onClick={() => getDetails(jobs.id)}>
           <td>{jobs.description}</td>
           <td>{jobs.notes}</td>
+          <td>{jobs.time_paid}</td>
           <td>{jobs.date}</td>
         </tr>
       );

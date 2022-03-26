@@ -30,7 +30,7 @@ function DetailsPage() {
     // console.log(userId)
     console.log(jobId)
   // console.log(details[0].description)
-  console.log(details[0]?.description)
+  console.log(details[0]?.time_paid)
 
       function handleSubmit(event) {
       event.preventDefault();

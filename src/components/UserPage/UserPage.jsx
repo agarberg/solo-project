@@ -97,7 +97,7 @@ function handleSubmit (event){
         />
         </LocalizationProvider>
       <IconButton aria-label="Submit" type='submit'>
-  <DoubleArrowIcon />
+  <DoubleArrowIcon sx={{ fontSize: 100 }} />
   </IconButton>
   </div>
       </form>
