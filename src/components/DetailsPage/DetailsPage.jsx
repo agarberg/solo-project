@@ -10,7 +10,9 @@ import { useDispatch } from 'react-redux'
 import { HashRouter as Router, useHistory } from 'react-router-dom';
 import History from '../History/History';
 import { getDateRangePickerDayUtilityClass } from '@mui/lab';
-
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 function DetailsPage() {
   	const [description, setDescription] = useState();
@@ -26,11 +28,11 @@ function DetailsPage() {
     const weeklyHours = useSelector((store) => store.weeklyHoursReducer)
     console.log (details)
     const userId = user.id
-    let jobId = details[0]?.id
+    let jobId = details?.id
     // console.log(userId)
     console.log(jobId)
   // console.log(details[0].description)
-  console.log(details[0]?.time_paid)
+  console.log(details.description)
 
       function handleSubmit(event) {
       event.preventDefault();
@@ -43,7 +45,7 @@ function DetailsPage() {
           time_paid: hrsPaid,
           time_actual: hrsActual,
           user_id: userId,
-          id: details[0].id,
+          id: details.id,
         }})
         history.push('/history')
         dispatch({
@@ -66,28 +68,30 @@ console.log (details[0])
       <form onSubmit={handleSubmit} className='editForm'>
 
       <TextField fullWidth id="fullWidth" variant="outlined" multiline maxRows={2}
-      defaultValue={details[0]?.description} helperText="Description"
+      defaultValue={details?.description} helperText="Description"
       onChange={(event) => setDescription(event.target.value)}/>
 
       <TextField fullWidth id="fullWidth" variant="outlined" multiline maxRows={2} margin="normal"
-      defaultValue={details[0]?.notes} helperText="Notes"
+      defaultValue={details?.notes} helperText="Notes"
       onChange={(event) => setNotes(event.target.value)}/>
 
       <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
-      defaultValue={details[0]?.ref_ro_num} helperText="Reference Number"
+      defaultValue={details?.ref_ro_num} helperText="Reference Number"
       onChange={(event) => setRef(event.target.value)}/>
 
       <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
-      defaultValue={details[0]?.time_paid} helperText="Hours Paid"
+      defaultValue={details?.time_paid} helperText="Hours Paid"
       onChange={(event) => setHrsPaid(event.target.value)}/>
 
       <TextField fullWidth id="fullWidth" variant="outlined" margin="normal"
-      defaultValue={details[0]?.time_actual} helperText="Hours Actual"
+      defaultValue={details?.time_actual} helperText="Hours Actual"
       onChange={(event) => setHrsActual(event.target.value)}/>
 
       <input type='submit' value='Update' />
+      <IconButton onClick={deleteJob}aria-label="delete" sx={{ fontSize: 50 }} >
+  <DeleteIcon fontSize="inherit" />
+</IconButton>
       </form>
-      <button onClick={deleteJob}>Delete</button>
       </>
 )
 }

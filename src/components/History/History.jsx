@@ -26,10 +26,10 @@ function getDetails(clickJob){
 
 
         dispatch({
-            type: 'GET_DETAILS',
-            payload: {
+            type: 'SET_DETAILS',
+            payload: 
                 clickJob
-            }
+            
 
         })
         history.push('/details')
@@ -49,7 +49,7 @@ function getDetails(clickJob){
   <tbody>
 {jobs.map((jobs, i) => {
       return (
-        <tr key={jobs.id} onClick={() => getDetails(jobs.id)}>
+        <tr key={jobs.id} onClick={() => getDetails(jobs)}>
           <td>{jobs.description}</td>
           <td>{jobs.notes}</td>
           <td>{jobs.time_paid}</td>
