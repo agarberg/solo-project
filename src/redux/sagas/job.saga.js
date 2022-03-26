@@ -8,7 +8,7 @@ import { connectAdvanced } from 'react-redux';
 function* setJob(action) {
   try {
     yield axios.post('/api/job/post', action.payload);
-    yield put({ type: 'SET_JOB', payload: action.payload });
+    yield put({ type: 'GET_JOB' });
   } catch (error) {
     alert('Error sending job:', error);
   }
