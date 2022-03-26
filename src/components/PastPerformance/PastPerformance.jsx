@@ -29,9 +29,9 @@ const daily = {
     datasets: [
       {
         label: 'Hours',
-        backgroundColor: 'rgba(75,192,192,1)',
+        backgroundColor: '#787878',
         borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
+        borderWidth: 3,
         data: dailyHours?.map((dailyHours) => dailyHours?.timePaid)
       }
     ]
@@ -42,9 +42,9 @@ const daily = {
     datasets: [
       {
         label: 'Hours',
-        backgroundColor: 'rgba(75,192,192,1)',
+        backgroundColor: '#787878',
         borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
+        borderWidth: 3,
         data: weeklyHours?.map((weeklyHours) => weeklyHours?.timePaid)
       }
     ]
@@ -54,9 +54,9 @@ const daily = {
     datasets: [
       {
         label: 'Hours',
-        backgroundColor: 'rgba(75,192,192,1)',
+        backgroundColor: '#787878',
         borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
+        borderWidth: 3,
         data: monthlyHours?.map((monthlyHours) => monthlyHours?.timePaid)
       }
     ]

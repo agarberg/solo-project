@@ -4,17 +4,20 @@ import './Nav.css';
 import { useSelector } from 'react-redux';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import EventNoteIcon from '@mui/icons-material/EventNote';
-
-
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded';
+import WatchLaterIcon from '@mui/icons-material/WatchLater';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
 <> 
     <div className="nav">
+    <AccessTimeFilledRoundedIcon sx={{ fontSize: 40 }} />
     <Link className="navLink" to="/user">
     <p className="nav-title">tech time tracker</p>
-            </Link> 
+    </Link> 
       
       
         {/* If no user is logged in, show these links */}
@@ -40,7 +43,7 @@ function Nav() {
               Info Page
               </Link> */}
               <Link className="navLink" to="/pastperformance">
-              <BarChartIcon sx={{ fontSize: 40 }} />
+              <AssessmentIcon sx={{ fontSize: 40 }} />
                 </Link>
               
             <Link className="navLink" to="/history">

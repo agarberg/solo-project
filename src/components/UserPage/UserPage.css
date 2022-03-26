@@ -1,5 +1,7 @@
 .hrsBilledDate {
     display: flex;
+    justify-content:flex-start;
+    align-items: flex-start;
     height: 60px;
     width: 350px;
     border: solid black 3px;
@@ -7,7 +9,7 @@
 
 }
 h4 {
-
+margin-top: 0px;
 
 }
 .inputFields {
