@@ -44,7 +44,6 @@ function* getJobs() {
         .catch(error => {
             console.log('error on PUT: ', error);
         })
-
   }
 
 function* getDetails(jobId){

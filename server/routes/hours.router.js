@@ -8,6 +8,7 @@ router.get('/weekly/:id', (req, res) => {
   queryText = `SELECT to_char(date_trunc('week', date ), 'MM/DD') AS "dates" , SUM (time_paid::INT)::VARCHAR "timePaid"
   FROM jobs WHERE "user_id" = $1
   GROUP BY "dates"
+  ORDER BY "dates" DESC
   LIMIT 5;`
   queryValue = [userId]
   pool.query (queryText, queryValue)
