@@ -88,7 +88,7 @@ console.log (details[0])
       onChange={(event) => setHrsActual(event.target.value)}/>
 
       <input type='submit' value='Update' />
-      <IconButton onClick={deleteJob}aria-label="delete" sx={{ fontSize: 50 }} >
+      <IconButton onClick={deleteJob}aria-label="delete" sx={{ fontSize: 40 }} >
   <DeleteIcon fontSize="inherit" />
 </IconButton>
       </form>
