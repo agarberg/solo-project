@@ -1,121 +1,190 @@
+#Tech Time Tracker
+#Adam Garberg
+#Mar/22 
 
-# Prime Solo Project Starting Repo
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
-
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
-
-## Use the Template for This Repository (Don't Clone)
-
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+Application Overview
 
 
-## Prerequisites
+When working as a flat rate automotive technician,  you are paid based on the work produced, not the hours worked. Historically, one would manually keep track of hours produced and compare it to the paycheck at the end of the week. Many will not keep track at all, relying solely on management  to properly process production.
 
-Before you get started, make sure you have the following software installed on your computer:
+TechTimeTracker will make a convenient and quick way for technicians to enter their job information that happens throughout the day, take notes, describe the job and upload a picture of the Repair Order. Productivity will be tracked daily, weekly and monthly. There will be charts to display past productivity.
 
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
 
-## Create database and table
 
-Create a new database called `prime_app` and create a `user` table:
 
-```SQL
+
+
+Functional Requirements
+
+1.1 Log-in (Mobile)
+
+
+Registered users will be able to log in to the application. The Log-in page will contain a link to the Registration page (no wireframe included). Registration will contain text inputs for username and password. The Registration page will also contain a button that navigates the user back to the Log-in screen and a button that will submit the form. After successful form submission, ( the user will automatically be logged in with the new account.
+
+Forgot password will not be included in this project.
+
+
+1.2 Display List of Widgets
+Description of the feature, including wireframes or mock-ups.
+
+This is the home screen. The top nav bar lets you have access to the calendar(history search).
+This page lets you input information about a job and save the info when the check box is clicked.
+The hours (today/this week) update automatically based on historical inputs. 
+
+ 
+This is the history search page, it lets you search previous jobs
+
+This is the history search results page. The button with the pencil on the right sends you to the edit/delete page. ADD BACK BUTTON , LOWER RIGHT?
+TO LEFT OF HISTORY?
+
+This Is the edit page. It allows you to delete or update an entry. 
+Delete or update buttons will send you back to history search page after delete or update is complete.
+WILL ADD A BACK BUTTON TO GO BACK TO SEARCH
+
+
+
+
+This page will show you past performance, sorted by daily, weekly and monthly
+
+
+
+Project Milestones and Schedule
+(Milestones are completed, working features from the above listing. Think carefully about the order you will need to build things and when you expect to be done with them. The purpose of this section is to consider the overall timeline and how much work really needs to get done. The Due Date is your best guess and may change.)
+
+Milestone (Should match a Feature from Above)
+Hours Est.
+Due Date
+Base or Stretch
+Make all components
+3
+3/14
+BASE
+Setup Database
+3
+3/14
+BASE
+Main page client side, create GET
+3
+3/14
+BASE
+Main page client side, Create POST
+3
+3/15
+BASE
+History  Search page, setup search, GET
+4
+3/15
+STRETCH
+History edit page, setup  
+3
+3/16
+BASE
+PUT 
+3
+3/24
+BASE
+Setup image upload function
+4
+3/23
+STRETCH
+Past Performance page - charting. before search!
+6
+3/23
+STRETCH
+Styling - MUI
+6
+3/24
+BASE
+DELETE
+3
+3/24
+BASE
+SERVER SIDE SETUP
+5
+3/16
+BASE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Database Documentation (https://dbdiagram.io/d)
+				             MANY					     			ONE
+
 CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+"id" SERIAL PRIMARY KEY,
+"password" VARCHAR(50),
+"full_name" VARCHAR(50),
+"username" VARCHAR(50),
+"date_created" DATE,
+"email" VARCHAR(30)
 );
-```
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+CREATE TABLE "jobs" (
+"id" SERIAL PRIMARY KEY,
+"user_id" VARCHAR(50),
+"description" VARCHAR(250),
+"time_actual" VARCHAR(20),
+"time_paid" VARCHAR(20),
+"notes" VARCHAR(250),
+"photo" VARCHAR(40),
+"ref_ro_num" VARCHAR(20),
+"date" DATE);
+Table user {
+  id int [pk, increment]
+  username varchar
+  password varchar
+  full_name varchar
+  created_at timestamp
+  email varchar
+}
 
-## Development Setup Instructions
+  Table jobs {
+  id int [pk, increment]
+  user_id varchar 
+  description varchar
+  time_actual varchar
+  time_paid varchar
+  notes varchar
+  photo varchar
+  ref_ro_num varchar
+  date timestamp 
+  }
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+Ref: user.id < jobs.user_id 
 
-## Debugging
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+Browsers
+(Consider which browsers your target audience(s) will be likely to use and list them here. If you're targeting mobile-only, your list should note the mobile version of the browsers.)
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
+Application will fully support browsers listed below. All browsers or versions not listed below are considered out of scope.
 
-## Testing Routes with Postman
+Browser Name
+Mobile or Desktop?
+Version
+Example : Chrome
+Desktop
+Version 96.x
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+Technologies
+Node
+Express
+React
+Postgresql
+Heroku
