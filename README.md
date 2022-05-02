@@ -44,9 +44,9 @@ Please reference the databaseseed.sql file for database setup.
 
 ## Built With
 
-Node
-Express
-React
-Postgresql
-Heroku
-ChartJs
+- Node
+- Express
+- React
+- Postgresql
+- Heroku
+- ChartJs
