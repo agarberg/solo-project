@@ -6,6 +6,9 @@ When working as a flat rate automotive technician,  you are paid based on the wo
 
 TechTimeTracker will make a convenient and quick way for technicians to enter their job information that happens throughout the day, take notes, describe the job and upload a picture of the Repair Order. Productivity will be tracked daily, weekly and monthly. There will be charts to display past productivity.
 
+## See it deployed on Heroku!
+
+https://quiet-ocean-02328.herokuapp.com/
 
 ## Prerequisites
 
@@ -40,6 +43,7 @@ Please reference the databaseseed.sql file for database setup.
 - Navigate to `localhost:3000`
 
 ## Built With
+
 Node
 Express
 React
